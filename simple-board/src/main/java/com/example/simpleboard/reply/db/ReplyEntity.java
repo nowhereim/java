@@ -1,5 +1,7 @@
 package com.example.simpleboard.reply.db;
 
+import com.example.simpleboard.post.db.PostEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +19,10 @@ public class ReplyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long postId;
+    @ManyToOne
+    @ToString.Exclude
+    @JsonIgnore
+    private PostEntity post; //이름 뒤에 _id로 찾기때문에 이렇게 해줘야함.
 
     private String title;
 

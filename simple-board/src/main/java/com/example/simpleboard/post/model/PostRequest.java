@@ -16,6 +16,7 @@ import lombok.*;
 @Builder //빌더는 생성자를 대신해서 객체를 생성해주는 역할을 한다. ??
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostRequest {
+
     @NotBlank
     private String title;
 

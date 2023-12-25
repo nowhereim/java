@@ -2,22 +2,25 @@ package com.example.simpleboard.board.service;
 
 import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.board.db.BoardRepository;
+import com.example.simpleboard.board.model.BoardDto;
 import com.example.simpleboard.board.model.BoardRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class BoardApiService {
-    public final BoardRepository boardRepository;
-
+    private final BoardRepository boardRepository;
+    private final BoardConverter boardConverter;
     public List<BoardEntity> findAll(){
         return boardRepository.findAll();
     };
 
-    public BoardEntity save(BoardRequest boardEntity){
+    public BoardDto save(BoardRequest boardEntity){
         //요청할때 넘어온 객체를 받았음. 여기서는 boardName 만 받음.
         System.out.println(boardEntity);
         var entity = BoardEntity.builder()
@@ -29,7 +32,18 @@ public class BoardApiService {
         System.out.println(entity);
         //이부분이 모호해서 더 익숙해져야할듯.
 
-        return boardRepository.save(entity);
+        BoardEntity savedEntity = boardRepository.save(entity);
+        return boardConverter.toDto(savedEntity);
 
     };
+
+    public BoardEntity
+    findById(Long id){
+        return boardRepository.findById(id).orElseThrow();
+    };
+
+    public BoardDto view(Long id) {
+        BoardEntity entity = boardRepository.findById(id).orElseThrow();
+        return boardConverter.toDto(entity);
+    }
 }

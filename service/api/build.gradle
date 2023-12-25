@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+group = 'org.delivery'
+version = '1.0-SNAPSHOT'
+java {
+    sourceCompatibility = '17'
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":db") // 프로젝트 의존성 추가
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2' //스프링부터 3.2.1버전에서는 2.0.2버전 사용해야함 개 조랄을 했네.
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar
+{
+    enabled = true
+}
+
+jar
+{
+    enabled = false
+}

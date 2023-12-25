@@ -3,6 +3,7 @@ package com.example.simpleboard.reply.model;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -17,6 +18,8 @@ import java.time.LocalDateTime;
 //이건 dto다. request는 사용자가 요청한 데이터를 담는 객체이다.
 public class ReplyRequest {
 
+
+    @NotNull
     private Long postId;
 
     @NotBlank
@@ -31,6 +34,7 @@ public class ReplyRequest {
 
     @NotBlank
     private String content;
+
 
 
 }

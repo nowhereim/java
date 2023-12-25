@@ -1,0 +1,23 @@
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate # validate, update, create, create-drop
+  datasource:
+    url: jdbc:mysql://localhost:3306/simple_board?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: rich1104
+
+  devtools:
+    # Live Reload
+    livereload:
+      enabled: true
+    # Auto Restart
+    restart:
+      enabled: true
+      additional-exclude: static/**,public/**
